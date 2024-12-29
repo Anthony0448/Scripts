@@ -72,7 +72,9 @@ sudo rm -rf $DEFAULT_DIR/Server-Files-$newVersion.zip
 # -r recursive
 # -u overwrites existing files undonditionally
 # /*: Ensures only the contents of the specified directories are copied, not the directories themselves.
-cp -ru $DEFAULT_DIR/Server-Files-$currentVersion/{world,local,server.properties,eula.txt,journeymap} $DEFAULT_DIR/Server-Files-$newVersion/
+cp -ru $DEFAULT_DIR/Server-Files-$currentVersion/{world,local,server.properties,eula.txt,journeymap,user_jvm_args.txt,whitelist.json} $DEFAULT_DIR/Server-Files-$newVersion/
 
 # Remove the old version folder after copy completed
 rm -rf $DEFAULT_DIR/Server-Files-$currentVersion
+
+echo "DONE!"
