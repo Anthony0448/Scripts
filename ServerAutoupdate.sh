@@ -1,3 +1,5 @@
+#!/bin/bash
+
 DEFAULT_DIR="/home/opc"
 
 # Ensure that the specified version directory does exist
@@ -51,7 +53,7 @@ done
 echo "Creating backup for $DEFAULT_DIR/Server-Files-$currentVersion"
 # -a is archive, so it copies directoties and their permissions
 # -v is verbose to print out each file that is copied to terminal
-rsync -av --progress $DEFAULT_DIR/Server-Files-$currentVersion/ $DEFAULT_DIR/Backups/Server-Files-$currentVersion-Backup/
+rsync -av --progress $DEFAULT_DIR/Server-Files-$currentVersion/ $DEFAULT_DIR/Backups/Server-Files-$currentVersion-Backup
 
 echo
 echo "Backup complete! Stored in $DEFAULT_DIR/Backups/Server-Files-$currentVersion-Backup/"
@@ -78,3 +80,6 @@ cp -ru $DEFAULT_DIR/Server-Files-$currentVersion/{world,local,server.properties,
 rm -rf $DEFAULT_DIR/Server-Files-$currentVersion
 
 echo "DONE!"
+
+echo "Starting server right meow..."
+sudo bash $DEFAULT_DIR/Server-Files-$newVersion/startserver.sh
