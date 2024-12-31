@@ -5,7 +5,8 @@ DEFAULT_DIR="/home/opc"
 # Ensure that the specified version directory does exist
 while true; do
     # Get the current version of the modpack to know which directory to back up
-    echo "Enter the current modpack version i.g. ($DEFAULT_DIR/Server-Files-2.11) is 2.11"
+    echo "Enter the current modpack version"
+    ls ~/
     # -r is needed, so backslashes are not treated as escape characters
     read -r currentVersion
 
