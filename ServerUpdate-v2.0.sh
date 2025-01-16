@@ -88,22 +88,22 @@ current_date=$(date +%Y-%m-%d_%H-%M)
 # \.: Matches a literal dot (.).
 # [0-9]*: Matches any number of digits for the minor version.
 # The -o option in grep stands for "only matching". When used, it tells grep to output only the parts of the input that match the specified regular expression, rather than the entire line that contains the match.
-oldDirectoryName=$(echo "$oldVersionDirectory" | grep -o "ServerFiles-[0-9]*\.[0-9]*")
+# oldDirectoryName=$(echo "$oldVersionDirectory" | grep -o "ServerFiles-[0-9]*\.[0-9]*")
 
-echo "Creating a backup of $oldVersionDirectory in $BACKUP_DIR/""$oldDirectoryName""_$current_date/"
 echo "Copying..."
 
-sudo rsync -a "$oldVersionDirectory"/ $BACKUP_DIR/"$oldDirectoryName"_"$current_date"/
+# The basename gets only the last directory name, so /home/opc/ServerFiles-1.23 becomes ServerFiles-1.23
+sudo rsync -a "$oldVersionDirectory"/ $BACKUP_DIR/"$(basename "$oldVersionDirectory")"_"$current_date"/
 
 # If the directory does not exist...exit
-if [ ! -d $BACKUP_DIR/"$oldDirectoryName"_"$current_date" ]; then
+if [ ! -d "$BACKUP_DIR"/"$(basename "$oldVersionDirectory")"_"$current_date" ]; then
     echo "Backup does not exist! Exiting..."
 
     exit 1
 else
     echo
     # Double quote bs to prevent error in echo
-    echo "Backup complete! Stored in $BACKUP_DIR/""$oldDirectoryName""_""$current_date"""
+    echo "Backup complete! Stored in  $BACKUP_DIR/""$(basename" $oldVersionDirectory")""_""$current_date""/"
 fi
 
 # At this point the zip should be downloaded and the backup should be made
@@ -117,6 +117,19 @@ echo "Unzipping..."
 # -q is quiet
 # -o overrides the prompt to confirm with sudo
 # Last part removes the .zip
-sudo unzip -q "$DEFAULT_DIR/$urlFileName" -d "$DEFAULT_DIR/"
 
+sudo unzip -q "$DEFAULT_DIR/$urlFileName" -d "$DEFAULT_DIR/"
+sudo rm -rf "$DEFAULT_DIR/$urlFileName"
+echo
+echo "Removed leftover zip file"
+
+echo
+
+echo "Copying personal server data..."
 sudo cp -ru "$oldVersionDirectory"/{world,local,server.properties,eula.txt,journeymap,user_jvm_args.txt,whitelist.json} "$DEFAULT_DIR/$(basename "$urlFileName" .zip)"
+echo "Copy complete!"
+
+echo "Removing old version directory at ""$oldVersionDirectory""..."
+sudo rm -rf "$oldVersionDirectory"
+
+echo "Script complete!"
