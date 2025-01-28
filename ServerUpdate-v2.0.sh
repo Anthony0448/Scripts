@@ -80,7 +80,8 @@ done
 
 # Append current date date to the directory to not overwrite old directories just in case + adds date reference
 # Get current date and time in YYYY-MM-DD_HH-MM format
-current_date=$(date +%Y-%m-%d_%H-%M)
+# current_date=$(date +%Y-%m-%d_%H-%M)
+current_date=$(date +%m-%d_%H-%M_%Y)
 
 # Old directory name
 # ServerFiles-: Matches the literal string ServerFiles-.
@@ -126,10 +127,13 @@ echo "Removed leftover zip file"
 echo
 
 echo "Copying personal server data..."
-sudo cp -ru "$oldVersionDirectory"/{world,local,server.properties,eula.txt,journeymap,user_jvm_args.txt,whitelist.json} "$DEFAULT_DIR/$(basename "$urlFileName" .zip)"
+sudo cp -ru "$oldVersionDirectory"/{world,local,server.properties,eula.txt,journeymap,user_jvm_args.txt,whitelist.json,ops.json} "$DEFAULT_DIR/$(basename "$urlFileName" .zip)"
 echo "Copy complete!"
 
 echo "Removing old version directory at ""$oldVersionDirectory""..."
 sudo rm -rf "$oldVersionDirectory"
 
-echo "Script complete!"
+echo
+echo "Starting Server..."
+sudo chmod +x "$DEFAULT_DIR/$(basename "$urlFileName")/startserver.sh"
+sudo "$DEFAULT_DIR/$(basename "$urlFileName")/startserver.sh"
