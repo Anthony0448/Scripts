@@ -137,3 +137,5 @@ echo
 echo "Starting Server..."
 sudo chmod +x "$DEFAULT_DIR/$(basename "$urlFileName")/startserver.sh"
 sudo "$DEFAULT_DIR/$(basename "$urlFileName")/startserver.sh"
+
+# Consider swithcing the backup from rsync to mv since it is the same folder.
