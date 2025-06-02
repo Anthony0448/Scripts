@@ -15,4 +15,5 @@ input_filename = '/Users/anthony/Desktop/Line/VIDEO TITLE.txt'
 output_filename = "output.txt"  # Replace with your desired output file name
 
 remove_timestamp_lines(input_filename, output_filename)
+
 print(f"Processed file saved as {output_filename}")

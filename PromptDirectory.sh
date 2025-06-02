@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the base directory
-base_dir="/home/opc"
+base_dir="$HOME"
 
 # List all files and directories (names only for display)
 echo "Files and directories in $base_dir:"
