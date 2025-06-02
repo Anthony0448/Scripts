@@ -3,6 +3,10 @@
 DEFAULT_DIR="/home/opc"
 BACKUP_DIR="$DEFAULT_DIR/Backups"
 
+# Ensure backup directory exists
+mkdir -p "$BACKUP_DIR"
+echo "Ensured backup directory exists at $BACKUP_DIR"
+
 # List all files and directories (names only for display)
 echo "Files and directories in $DEFAULT_DIR:"
 items=("$DEFAULT_DIR"/*)  # Array of full paths

@@ -1,7 +1,6 @@
 #!/bin/bash
 
-DEFAULT_DIR="/home/opc"
-BACKUP_DIR="$DEFAULT_DIR/Backups"
+DEFAULT_DIR="$HOME"
 
 # List all files and directories (names only for display)
 echo "Files and directories in $DEFAULT_DIR:"
