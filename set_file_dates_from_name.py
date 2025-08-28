@@ -34,7 +34,7 @@ def update_timestamps(folder):
         filepath = os.path.join(folder, file)
 
         try:
-            # ps.utime: "Set the access and modified times of the file specified by path."
+            # os.utime: "Set the access and modified times of the file specified by path."
             # Set current file at 'filepath' access time and modficiation time to what is specified in the filename
             os.utime(filepath, (timestamp, timestamp))
             print(f"Updated: {file} creation date to {date_obj.date()}")
